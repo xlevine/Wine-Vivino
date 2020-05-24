@@ -2,7 +2,7 @@
 
 ## Goal
 
-**For a given price range and wine type (rose, red, white), what kind of wine should one be choosing at store if one has only a limited amount of information available (Region, Year, Name)?**
+**For a given price range and wine category (e.g. red, white), what kind of wine should one be choosing at store if one has only a limited amount of information available (Region, Year, Name)?**
 
 ## Production and Consumption of Wines in France
 
