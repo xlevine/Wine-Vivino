@@ -43,3 +43,17 @@ For more details on how the data was scrapped, please refer to script [web_scrap
 ## Selection Criteria: 
 
 (a) Items produced and sold in France, (b) cheaper than 100 euros, and (c) reviewed by at least 20 people. Red and white (non-sparkling) wines were analyzed separately. Combining all criteria give **13729 red** and **5207 white** wines.
+
+## Price by regions
+
+## Ratings by regions
+
+## Vintage by regions
+
+## Quality by regions and price range
+
+## Rating vs. Price
+
+
+
+
