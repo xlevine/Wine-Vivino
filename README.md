@@ -35,4 +35,6 @@ Using a web scraping tool (Selenium) compatible with Python3, we extract the fol
 
 - Price of sale
 
+For more details on how the data was scrapped, please refer to script [web_scrapping.py](https://github.com/xlevine/Wine_Analysis/blob/master/web_scraping.py)
+
 
