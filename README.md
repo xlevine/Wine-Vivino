@@ -44,6 +44,8 @@ For more details on how the data was scrapped, please refer to script [web_scrap
 
 (a) Items produced and sold in France, (b) cheaper than 100 euros, and (c) reviewed by at least 20 people. Red and white (non-sparkling) wines were analyzed separately. Combining all criteria give **13729 red** and **5207 white** wines.
 
+For more details on how the data was analyzed, please refer to script [vin_analysis.py](https://github.com/xlevine/Wine_Analysis/blob/master/vin_analysis.py)
+
 ## Price by Wine category (red, wine)
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png" width="400">
