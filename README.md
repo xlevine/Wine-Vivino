@@ -46,26 +46,39 @@ For more details on how the data was scrapped, please refer to script [web_scrap
 
 For more details on how the data was analyzed, please refer to script [vin_analysis.py](https://github.com/xlevine/Wine_Analysis/blob/master/vin_analysis.py)
 
-## Price by Wine category
+## Price by Wine Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png" width="400">
 
-## Price by Wine regions for each category
+Probability distribution function (PDF) of the sale price for (L) red and (R) white wines. 
+
+## Price by Wine regions and Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_white_Francia.png" width="400">
 
-## Ratings by regions for each category
+PDF of the sale price for (L) red and (R) white wines, for each region of AOP production. The legend shows the percentage of wines coming from each region. 
+
+## Ratings by regions and Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_white_Francia.png" width="400">
 
-## Vintage by regions for each category
+Probability distribution function (PDF) for the Ratings for (L) red and (R) white wines. Ratings is on a scale of 0 (poor) to 5 (excellent).
+
+## Vintage by regions and Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_white_Francia.png" width="400">
 
-## Rating vs. Price by Wine category
+PDF of the Vintage (year of production) for (L) red and (R) white wines. 
+
+## Rating vs. Price by Wine Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_white_FR.png" width="400">
+
+Ratings vs. price for (L) red and (R) white wines.
 
 ## Quality by regions and price range
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_white_FR.png" width="400">
+
+Likelihood of a (L) red or (R) white wine from each region being better rated than the average among its peers in 3 different price range: 5 to 15 euros, 15 to 25, and 25 to 35 euros.    
+
