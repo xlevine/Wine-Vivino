@@ -13,5 +13,26 @@ An analysis of wines sold in France (2020)
 
 - Wine production in 2017 generated over 11,2bn euros, i.e. about 16 % of the total value of french agriculture.
 
-- Main regions of production: Alsace, Beaujolais,  Bordeaux, Bourgogne, Champagne, Corse, Jura, Languedoc-Roussillon, Provence,  Savoie-Bugey, Sud-Ouest, Val de Loire, Vallée du Rhône
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/carte_vin_france_petit.jpg)
+
+- Main regions of AOP production: (1) Alsace, (2) Bordeaux, (4) Bourgogne, (6) Champagne, (9) Languedoc-Roussillon, (12) Provence, (11) Val de Loire, (14) Vallée du Rhône
+
+## Database and methodology
+
+- Vivino.com is an online marketplace and rating app for wine founded in 2010 and headquartered in San Francisco.
+
+- Its database contains more than 10 million wines.
+
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Vivino_screen.png)
+
+Using a web scraping tool (Selenium) compatible with Python3, we extract the following data:
+
+- Country, Region, and Estate name
+
+- Robe (red, wine, sparkling, rose) & Vintage (year)
+
+- Ratings (0 to 5 scale) & number of reviews
+
+- Price of sale
+
 
