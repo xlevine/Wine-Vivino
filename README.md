@@ -47,8 +47,9 @@ For more details on how the data was scrapped, please refer to script [web_scrap
 ## Price by Wine category (red, wine)
 
 ![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png)
-<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png" width="300">
 ![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png)
+
+<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png" width="300"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png" width="300">
 
 ## Price by Wine regions (red, wine)
 
