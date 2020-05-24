@@ -46,32 +46,27 @@ For more details on how the data was scrapped, please refer to script [web_scrap
 
 ## Price by Wine category (red, wine)
 
-<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png" width="450"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png" width="450">
+<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png" width="400">
 
 ## Price by Wine regions (red, wine)
 
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_red_Francia.png)
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_white_Francia.png)
+<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_white_Francia.png" width="400">
 
 ## Ratings by regions
 
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_red_Francia.png)
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_white_Francia.png)
+<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_white_Francia.png" width="400">
 
 ## Vintage by regions
 
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_red_Francia.png)
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_white_Francia.png)
+<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_white_Francia.png" width="400">
 
 ## Rating vs. Price
 
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_red_FR.png)
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_white_FR.png)
+<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_white_FR.png" width="400">
 
 ## Quality by regions and price range
 
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_red_FR.png)
-![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_white_FR.png)
+<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_white_FR.png" width="400">
 
 
 
