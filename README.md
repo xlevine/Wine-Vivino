@@ -44,15 +44,35 @@ For more details on how the data was scrapped, please refer to script [web_scrap
 
 (a) Items produced and sold in France, (b) cheaper than 100 euros, and (c) reviewed by at least 20 people. Red and white (non-sparkling) wines were analyzed separately. Combining all criteria give **13729 red** and **5207 white** wines.
 
-## Price by regions
+## Price by Wine category (red, wine)
+
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png)
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png)
+
+## Price by Wine regions (red, wine)
+
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_red_Francia.png)
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_white_Francia.png)
 
 ## Ratings by regions
 
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_red_Francia.png)
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_white_Francia.png)
+
 ## Vintage by regions
+
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_red_Francia.png)
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_white_Francia.png)
+
+## Rating vs. Price
+
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_red_FR.png)
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_white_FR.png)
 
 ## Quality by regions and price range
 
-## Rating vs. Price
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_red_FR.png)
+![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_white_FR.png)
 
 
 
