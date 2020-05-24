@@ -46,30 +46,26 @@ For more details on how the data was scrapped, please refer to script [web_scrap
 
 For more details on how the data was analyzed, please refer to script [vin_analysis.py](https://github.com/xlevine/Wine_Analysis/blob/master/vin_analysis.py)
 
-## Price by Wine category (red, wine)
+## Price by Wine category
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png" width="400">
 
-## Price by Wine regions (red, wine)
+## Price by Wine regions for each category
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_white_Francia.png" width="400">
 
-## Ratings by regions
+## Ratings by regions for each category
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_white_Francia.png" width="400">
 
-## Vintage by regions
+## Vintage by regions for each category
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_white_Francia.png" width="400">
 
-## Rating vs. Price
+## Rating vs. Price by Wine category
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_white_FR.png" width="400">
 
 ## Quality by regions and price range
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_white_FR.png" width="400">
-
-
-
-
