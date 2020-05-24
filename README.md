@@ -1,5 +1,10 @@
 # Wine_Analysis
+
 An analysis of wines sold in France (2020)
+
+## Goal
+
+**For a given price range and wine type (rose, red, white), what kind of wine should one be choosing at store if one has only a limited amount of information available (Region, Year, Name)?**
 
 ## Production and Consumption of Wines in France
 
@@ -37,4 +42,6 @@ Using a web scraping tool (Selenium) compatible with Python3, we extract the fol
 
 For more details on how the data was scrapped, please refer to script [web_scrapping.py](https://github.com/xlevine/Wine_Analysis/blob/master/web_scraping.py)
 
+## Selection Criteria: 
 
+(a) Items produced and sold in France, (b) cheaper than 100 euros, and (c) reviewed by at least 20 people. Red and white (non-sparkling) wines were analyzed separately. Combining all criteria give **13729 red** and **5207 white** wines.
