@@ -1,4 +1,4 @@
-# An analysis of wines sold in France (2020)
+# An analysis of wines sold in France on Vivino.com (2020)
 
 ## Goal
 
