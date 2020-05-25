@@ -10,7 +10,7 @@
 
 - AOP represents ⅔ of all wine produced in France.
 
-- A french person drinks about 60 wine bottles per year on average (60% red, 23% rosé, 17% white).
+- A french person drinks about 45 liters of wine per year on average today (eq. to about 60 standard size bottles), made of 52% red, 31% rosé, and 17% white (still or sparkling). (Vinexpo/IWSR study 2020)
 
 - About 60% of the wine produced in France is consumed there.
 
