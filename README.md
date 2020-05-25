@@ -60,7 +60,7 @@ PDF of the sale price for (L) red and (R) white wines, for each region of AOP pr
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_white_Francia.png" width="400">
 
-Probability distribution function (PDF) for the Ratings for (L) red and (R) white wines. Ratings is on a scale of 0 (poor) to 5 (excellent). Same graphical conventions as previous figure apply. 
+Probability distribution function (PDF) for the Ratings for (L) red and (R) white wines. Ratings is on a scale of 1 (poor) to 5 (excellent). Same graphical conventions as previous figure apply. 
 
 ## Vintage by Regions and Robe
 
