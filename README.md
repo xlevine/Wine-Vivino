@@ -34,7 +34,7 @@ Using a web scraping tool (Selenium) compatible with Python3, we extract the fol
 
 - Robe (red, still white, sparkling white, rosé) & Vintage (year)
 
-- Ratings (0 to 5 scale) & number of reviews
+- Ratings (1 to 5 scale) & number of reviews
 
 - Price of sale
 
@@ -56,7 +56,7 @@ Probability distribution function (PDF) of the sale price for (L) red and (R) wh
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_white_Francia.png" width="400">
 
-PDF of the sale price for (L) red and (R) white wines, for each region of AOP production. The legend shows the percentage of wines coming from each region; the percentage of wine coming from all 5 regions with respect to all AOP wines of the same robe (red, white) is shown in each panel's title. 
+PDF of the sale price for (L) red and (R) white wines, for each region of AOP production. The legend shows the percentage of wines coming from each region for each robe; the percentage of wine coming from all 5 regions with respect to all AOP wines of the same robe is shown in each panel's title. 
 
 ## Ratings by Regions and Robe
 
