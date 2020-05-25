@@ -22,7 +22,7 @@
 
 - Vivino.com is an online marketplace and rating app for wine founded in 2010 and headquartered in San Francisco.
 
-- Its database contains more than 10 million wines (REF).
+- Its database contains more than 10 million wines (wikipedia).
 
 ![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Vivino_screen.png)
 
