@@ -8,13 +8,13 @@
 
 - In 2017 in France, there were 46,600 vineyards producing AOP (Appellation d’Origine Contrôlée) wines, which covered 446,588 ha of land.
 
-- AOP represents ⅔ of all wine produced in France.
+- AOP represents ⅔ of all wine produced in France (REF).
 
 - A french person drinks about 45 liters of wine per year on average today (eq. to about 60 standard size bottles), made of 52% red, 31% rosé, and 17% white (still or sparkling). (Vinexpo/IWSR study 2020)
 
-- About 60% of the wine produced in France is consumed there.
+- About 60% of the wine produced in France is consumed there (REF).
 
-- Wine production in 2017 generated over 11,2bn euros, i.e. about 16 % of the total value of french agriculture.
+- Wine production in 2017 generated over 11,2bn euros, i.e. about 16 % of the total value of french agriculture (REF).
 
 ![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/carte_vin_france_petit.jpg)
 
@@ -24,7 +24,7 @@
 
 - Vivino.com is an online marketplace and rating app for wine founded in 2010 and headquartered in San Francisco.
 
-- Its database contains more than 10 million wines.
+- Its database contains more than 10 million wines (REF).
 
 ![Image description](https://github.com/xlevine/Wine_Analysis/blob/master/plots/Vivino_screen.png)
 
