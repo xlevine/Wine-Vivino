@@ -48,7 +48,7 @@ For more details on how the data was analyzed, please refer to script [vin_analy
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png" width="400">
 
-Probability distribution function (PDF) of the sale price for (L) red and (R) white wines. Data is shown in an histogram with uniform bin size of 2 euros (black line), and by its Gaussian kernel density estimation (orange line).
+Probability distribution function (PDF) of the sale price for (L) red and (R) white wines. Data is shown in an histogram with uniform bin size of 2 euros (black line), and by its Gaussian kernel density estimation [KDE] (orange line). Histogram and KDE are normalized such that all probabilities sum to 1 when integrating over the 0-100 euros price range. 
 
 ## Price by Regions and Robe
 
