@@ -32,7 +32,7 @@ Using a web scraping tool (Selenium) compatible with Python3, we extract the fol
 
 - Country, Region, and Estate name
 
-- Robe (red, wine, sparkling, rose) & Vintage (year)
+- Robe (red, still white, sparkling white, rosé) & Vintage (year)
 
 - Ratings (0 to 5 scale) & number of reviews
 
@@ -46,39 +46,39 @@ For more details on how the data was scrapped, please refer to script [web_scrap
 
 For more details on how the data was analyzed, please refer to script [vin_analysis.py](https://github.com/xlevine/Wine_Analysis/blob/master/vin_analysis.py)
 
-## Price by Wine Robe
+## Price by Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/price_hist_white_FR.png" width="400">
 
 Probability distribution function (PDF) of the sale price for (L) red and (R) white wines. 
 
-## Price by Wine regions and Robe
+## Price by Regions and Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_density_white_Francia.png" width="400">
 
-PDF of the sale price for (L) red and (R) white wines, for each region of AOP production. The legend shows the percentage of wines coming from each region. 
+PDF of the sale price for (L) red and (R) white wines, for each region of AOP production. The legend shows the percentage of wines coming from each region; the percentage of wine coming from all 5 regions with respect to all AOP wines of the same robe (red, white) is shown in each panel's title. 
 
-## Ratings by regions and Robe
+## Ratings by Regions and Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_density_white_Francia.png" width="400">
 
-Probability distribution function (PDF) for the Ratings for (L) red and (R) white wines. Ratings is on a scale of 0 (poor) to 5 (excellent).
+Probability distribution function (PDF) for the Ratings for (L) red and (R) white wines. Ratings is on a scale of 0 (poor) to 5 (excellent). Same graphical conventions as previous figure apply. 
 
-## Vintage by regions and Robe
+## Vintage by Regions and Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_red_Francia.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Year_density_white_Francia.png" width="400">
 
-PDF of the Vintage (year of production) for (L) red and (R) white wines. 
+PDF of the Vintage (year of production) for (L) red and (R) white wines. Same graphical conventions as previous figure apply.
 
-## Rating vs. Price by Wine Robe
+## Rating vs. Price by Robe
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_vs_Price_white_FR.png" width="400">
 
-Ratings vs. price for (L) red and (R) white wines.
+Ratings vs. price for (L) red and (R) white wines; each dot is one item. The average (red line), median (magenta line), and the 95% enveloppe of all ratings (blue lines) are shown as a function of the price. 
 
-## Quality by regions and price range
+## Quality by Regions and Price Range
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_white_FR.png" width="400">
 
-Likelihood of a (L) red or (R) white wine from each region being better rated than the average among its peers in 3 different price range: 5 to 15 euros, 15 to 25, and 25 to 35 euros.    
+Likelihood of a (L) red or (R) white wine from each region being better rated than the average among its peers in 3 different price range: 5 to 15 euros, 15 to 25, and 25 to 35 euros. A 95% confidence interval on the Likelihood estimate is shown for each region and price range.       
 
