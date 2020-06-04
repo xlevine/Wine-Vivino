@@ -5,6 +5,10 @@ import numpy as np
 import pandas as pd
 import scipy.stats as stats
 import matplotlib.pyplot as plt
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+import researchpy as rp
 
 A = np.arange(0,30,1); B = np.arange(30,50,5); C = np.arange(50,250,10); D = np.arange(250,550,50)
 list_target_price = np.concatenate((A,B,C,D))
@@ -44,20 +48,29 @@ def filter_scrapped_data(country,color):
     Vintage_year = Vintage_year_1.loc[Vintage_year_1['Year'] > 1980 ] 
 
     # clean Region name
+    Vintage_clean = pd.DataFrame(columns = ['Region','Domain','Cru','Year','ratings','reviews','Price'])
     for index, row in Vintage_year.iterrows():
         element = row['Region']
-        try:
-            Region_old = Vintage_year['Region'].loc[index]
-            Region_new = [character for character in Region_old if character.isalnum()]
-            Region_new = "".join(Region_new)
-            Region_new = Region_new.lower()
-            Vintage_year['Region'].loc[index] = Region_new
+        Vintage_clean.loc[index, 'Year':'reviews'] = Vintage_year.loc[index, 'Year':'reviews']
+        Vintage_clean.loc[index, 'Price'] = Vintage_year.loc[index, 'Price']
+        try:            
+            varname_list = ['Region','Domain','Cru']
+            for varname in varname_list:
+                var_old = Vintage_year[varname].loc[index]
+                var_new = [character for character in var_old if character.isalnum()]
+                var_new = "".join(var_new)
+                var_new = var_new.lower()
+                Vintage_clean[varname].loc[index] = var_new
+
         except (ValueError,TypeError,NameError):
-            Vintage_year['Region'].loc[index] = np.nan
+
+            Vintage_clean['Region'].loc[index] = np.nan
+            Vintage_clean['Domain'].loc[index] = np.nan
+            Vintage_clean['Cru'].loc[index] = np.nan
 
     # find duplicated entries and remove them
-    Vintage_filter_index = Vintage_year.duplicated(subset=None, keep='first')
-    Vintage_filter = Vintage_year[~Vintage_filter_index]
+    Vintage_filter_index = Vintage_clean.duplicated(subset=None, keep='first')
+    Vintage_filter = Vintage_clean[~Vintage_filter_index]
 
     Vintage_list = Vintage_filter
 
@@ -90,7 +103,7 @@ def filter_Vintage_AOC(country,color,region):
         
     Vintage = filter_scrapped_data(country,color)
 
-    Vintage_Region = pd.DataFrame(columns = ['Country','Region','Domain','Cru','Year','ratings','reviews','link','Price'])
+    Vintage_Region = pd.DataFrame(columns = ['Region','Domain','Cru','Year','ratings','reviews','Price'])
     n_item = 0
     for n in np.arange(0,len(AOC_list),1):
         AOC_odditem = AOC_list[n][0]
@@ -153,6 +166,18 @@ def convert_pdframe_to_nparray(Vintage,varname):
 
     return var_array
 
+def filter_nparray(country,color,varname,price_min,price_max,reviews_min,year_min,year_max,region='all'):
+
+    Vintage, ratio = select_by_region(country,color,region)
+    Vintage_filter = filter_by_criteria(Vintage,price_min,price_max,reviews_min,year_min,year_max)
+    var_array = convert_pdframe_to_nparray(Vintage_filter,varname)
+    var_array = var_array[~np.isnan(var_array)]
+    var_mean = np.mean(var_array)
+    var_array_diff = np.subtract(var_array,var_mean)
+    var_variance = np.var(var_array_diff)
+
+    return var_array, var_mean, var_variance, ratio
+
     # For all categories: 
       # 1. Graph # of item vs. price      
 def get_means_bounds(var1_array,var2_array,bins_lim,alphap):
@@ -197,72 +222,138 @@ def get_means_bounds(var1_array,var2_array,bins_lim,alphap):
 # We compute the total amount of variance explained by all predictors, for each class of price range
 # NB: Continuous and Categorical predictors are present
 
-# In each price range, we compute total variance in rating, VarT
-# In each price range, we compute intra-group variance in rating, VarG
-# In each price range, we compute inter-group variance in rating, VarC
-# amount of variance explained by predictor 1 - VarC/VarT
+# for each region, plot fraction of variance in quality explained by Price and Year
 
-# produce groups by Region
-def compute_explained_variance(varname,country,color):
+def compare_variance_all(varname,country,color):
 
-    # price bins
-    price_bins = [5, 15, 25, 35]
-    
-    pct_above_median_region_allprice = []; ratio_region_allprice =[]; pct_above_median_boot_lower_region_allprice = []; pct_above_median_boot_upper_region_allprice = []
-    for p in np.arange(0,len(price_bins)-1,1):
-        price_min = price_bins[p]
-        price_max = price_bins[p+1]
-        print(price_min,price_max)
-        [variance_region,region_by_color_list,ratio_region,marker_list] = compute_variance_quality(varname,country,color,price_min,price_max)
-        variance_region_allprice.append(variance_region)
-        ratio_region_allprice.append(ratio_region)
-    variance_region_allprice = np.asarray(variance_region_allprice)
-    ratio_region_allprice = np.asarray(ratio_region_allprice)
+    if varname=='ratings':
+        marker_list = ['r','b','m']
+        predictor_by_color_list = ['Year', 'Province', 'Price']
+    elif varname=='Price':
+        marker_list = ['r','b','c']
+        predictor_by_color_list = ['Year', 'Province', 'ratings']
 
-#    print(pct_above_median_allprice)
-    filename = 'variance_' + varname + '_' + country + '_' + color
-    np.save(filename,[variance_region_allprice, region_by_color_list, ratio_region_allprice, marker_list, price_bins])
+    compare_variance(varname,country,color,price_min,price_max)
+    SSG_var = []
+    for Price_min in np.arange(5,45,10):
+#        print(Price_min)
+        var_explained = compare_variance(varname,country,color,Price_min,Price_min+10)
+        SSG_var.append(var_explained)
+                        
+    SSG_var = np.asarray(SSG_var)*100
 
-def compute_variance_quality(varname,country,color,price_min,price_max):
+    bins_lim = np.arange(5,45+10,10)
+    nbins = np.shape(SSG_var)[0]
+    ndata = np.shape(SSG_var)[1]
+    bins_mean = np.add(bins_lim[:-1],bins_lim[1:])/2.0
+    bins_delta = np.subtract(bins_lim[1:],bins_lim[:-1])/(ndata+1)
 
-    region_by_color_list, marker_list = region_by_color(country,color) 
-    
-    # In a given price and year range,
-    Vintage, ratio = select_by_region(country,color)
-    Vintage_filter = filter_by_criteria(Vintage,price_min,price_max,reviews_min,year_min,year_max)
-    var_array = convert_pdframe_to_nparray(Vintage_filter,varname)
-    var_array = var_array[~np.isnan(var_array)]
-    mean_total = np.mean(var_array)
-    var_array = np.subtract(var_array,mean_total)
-    variance_total = np.sum(np.power(var_array,2))
-    print(variance_total,mean_total,len(var_array))
+    bins_label = []
+    for n in np.arange(0,nbins,1):
+        bins_label.append(str(bins_lim[n]) + ' - ' + str(bins_lim[n+1]) ) 
 
-    # for every region, compute number of items with ratings above median value and convert into a probability
-    variance_intra_region = []; variance_inter_region = []; ratio_region = []
-    for region in region_by_color_list:
-        print(region)
-        Vintage, ratio = select_by_region(country,color,region)
-        ratio_region.append(ratio)
-        Vintage_filter = filter_by_criteria(Vintage,price_min,price_max,reviews_min,year_min,year_max)
-        var_array = convert_pdframe_to_nparray(Vintage_filter,varname)
-        var_array = var_array[~np.isnan(var_array)]
-        mean_region = np.mean(var_array)
-        var_array = np.subtract(var_array,mean_region)        
-        variance_intra = np.sum(np.power(var_array,2))
-        mean_diff = np.subtract(mean_region,mean_total)
-        n_elements = len(var_array)
-        variance_inter = np.power(mean_diff,2)*n_elements
-        print(mean_diff,mean_diff**2,n_elements,variance_inter)
-        variance_intra_region.append(variance_intra)
-        variance_inter_region.append(variance_inter)
+    fig = plt.figure()
+    for n in np.arange(0,ndata,1):
+        plt.plot(bins_lim[:-1]+bins_delta*(n+1),np.squeeze(SSG_var[:,n]),'o'+marker_list[n], label=predictor_by_color_list[n])
+        plt.plot([bins_lim[:-1]+bins_delta*(n+1), bins_lim[:-1]+bins_delta*(n+1)],[np.zeros(np.shape(SSG_var)[0]), np.squeeze(SSG_var[:,n])],marker_list[n]+'-',linewidth=14)
 
-    variance_intra_region = np.asarray(variance_intra_region)
-    variance_inter_region = np.asarray(variance_inter_region)
-    ratio_region = np.asarray(ratio_region)
+    plt.xlabel('Price range' + ' [euro]')
+    plt.ylabel('[%]')
+    plt.xticks(bins_mean,bins_label)
+    plt.xlim(min(bins_lim),max(bins_lim))
+    for m in np.arange(0,nbins+1,1):
+        plt.plot([bins_lim[m], bins_lim[m]],[0, 100], 'k--', linewidth=3)
+#    plt.plot([bins_lim[0], bins_lim[nbins]],[50, 50], 'b--')
+    plt.ylim(0,10)
+    plt.legend(loc='upper left')
+    title = varname + ' variance in ' + color + ' wine from ' + country
+    savefile_name = varname + '_predictors_' + color + '_' + country
+    plt.title(title)
+    fig.savefig(savefile_name+'.png')
+    plt.close()
 
-    return variance_intra_region,variance_inter_region,region_by_color_list,ratio_region,marker_list
+def compare_variance(varname,country,color,price_min,price_max):
 
-######
+    var1 = 'Year'
+    var2 = 'Province'
+    varA = 'Price'
+    varB = 'ratings'
+
+#    compute = 'True'    
+    compute = 'False'    
+
+    if compute=='True':
+        n = 0
+        province_by_color_list, marker_list = region_by_color(country,color)
+        data_pd = pd.DataFrame(columns = [varA,varB,var1,var2])
+        for province in province_by_color_list:
+            print(province)
+            Vintage_, ratio = select_by_region(country,color,province)
+            Vintage = filter_by_criteria(Vintage_,price_min,price_max,reviews_min,year_min,year_max)
+            for index, row in Vintage.iterrows():                
+                data_pd.loc[n, var2] = province
+                data_pd.loc[n, varB] = Vintage.loc[index,varB]
+                data_pd.loc[n, var1] = Vintage.loc[index,var1]
+                data_pd.loc[n, varA] = Vintage.loc[index,varA]
+                n = n + 1
+        data_pd.to_pickle(varA + '_'+ varB + '_' +  var1 + '_' + var2 + '_Pmin'+  str(price_min) + '-Pmax' + str(price_max) + '_' + color + '_'+  country + '.pkl')            
+    else:
+        data_pd = pd.read_pickle(varA + '_'+ varB + '_' +  var1 + '_' + var2 + '_Pmin'+  str(price_min) + '-Pmax' + str(price_max) + '_' + color + '_'+  country + '.pkl')            
+
+    data_pd['ratings'] = pd.to_numeric(data_pd['ratings'], downcast="float")    
+    data_pd['Price'] = pd.to_numeric(data_pd['Price'], downcast="float")    
+    data_ols = data_pd.loc[data_pd['Year']>2010]
+
+    model = ols(formula=varname + ' ~ ' + var1, data=data_ols).fit()
+    anova_table = sm.stats.anova_lm(model, typ=2)
+#    print(anova_table)
+
+    model = ols(formula=varname + ' ~ ' + var2, data=data_ols).fit()
+    anova_table = sm.stats.anova_lm(model, typ=2)
+#    print(anova_table)
+
+    if varname=='Price':
+        model = ols(formula=varname + ' ~ ' + varB, data=data_ols).fit()
+        anova_table = sm.stats.anova_lm(model, typ=2)
+        var_explained = anova_table.sum_sq[varB] / np.sum(anova_table.sum_sq)       
+ #       print(var_explained)
+
+        model = ols(formula=varname + ' ~ ' + var1 + '+' +  var2 + '+' + varB, data=data_ols).fit() 
+        anova_table = sm.stats.anova_lm(model, typ=2)
+        var1_explained = anova_table.sum_sq[var1] / np.sum(anova_table.sum_sq)
+        var2_explained = anova_table.sum_sq[var2] / np.sum(anova_table.sum_sq)
+        varB_explained = anova_table.sum_sq[varB] / np.sum(anova_table.sum_sq)
+        print('Price variance is explained by:')
+        print(var1+'='+str(round(var1_explained*100,2)),var2+'='+str(round(var2_explained*100,2)),varB+'='+str(round(varB_explained*100,2)))
+        var_explained = [var1_explained, var2_explained, varB_explained]
+
+    elif varname=='ratings':
+        model = ols(formula=varname + ' ~ ' + varA, data=data_ols).fit()
+        anova_table = sm.stats.anova_lm(model, typ=2)
+        var_explained = anova_table.sum_sq[varA] / np.sum(anova_table.sum_sq)       
+#        print(var_explained)
+
+        model = ols(formula=varname + ' ~ ' + var1 + '+' +  var2 + '+' + varA, data=data_ols).fit() 
+        anova_table = sm.stats.anova_lm(model, typ=2)
+        var1_explained = anova_table.sum_sq[var1] / np.sum(anova_table.sum_sq)
+        var2_explained = anova_table.sum_sq[var2] / np.sum(anova_table.sum_sq)
+        varA_explained = anova_table.sum_sq[varA] / np.sum(anova_table.sum_sq)
+        print('Rating variance is explained by:')
+        print(var1+'='+str(round(var1_explained*100,2)),var2+'='+str(round(var2_explained*100,2)),varA+'='+str(round(varA_explained*100,2)))
+        var_explained = [var1_explained, var2_explained, varA_explained]
+
+    return var_explained
+
+#        mse_explained = anova_table.sum_sq['Residual'] / anova_table.df['Residual']
+#        var_unbias = (anova_table.sum_sq[varB] - (anova_table.df[varB])*mse_explained)/(np.sum(anova_table.sum_sq) + mse_explained)
+ #   print(rp.summary_cont(data_pd[varname]))
+ #   print(rp.summary_cont(data_pd[varname].groupby(data_pd[predictor1])))
+ #   print(rp.summary_cont(data_pd[varname].groupby(data_pd[predictor2])))
+ #   model = ols(formula=varname + ' ~ ' + predictor2, data=data_pd).fit()
+# For every price range, quantify ratio of variance explained by price, regions and years (assessing the importance of older bottles versus years).Last predictor may be the presence or absence of certain keywords.
+
+###############################################
+
 
 # We display likelihood of wines from each region to surclass their peers, for each class of price range
 def plot_probability_hist(varname,country,color):
@@ -313,7 +404,7 @@ def plot_probability_hist(varname,country,color):
 def compute_probability_hist(varname,country,color):
     
     # price bins
-    price_bins = [5, 15, 25, 35]
+    price_bins = [5, 15, 25, 35, 45]
     
     pct_above_median_region_allprice = []; ratio_region_allprice =[]; pct_above_median_boot_lower_region_allprice = []; pct_above_median_boot_upper_region_allprice = []
     for p in np.arange(0,len(price_bins)-1,1):
@@ -340,26 +431,21 @@ def compute_probability_quality(varname,country,color,price_min,price_max):
     region_by_color_list, marker_list = region_by_color(country,color) 
     
     # In a given price and year range,
-    Vintage, ratio = select_by_region(country,color)
-    Vintage_filter = filter_by_criteria(Vintage,price_min,price_max,reviews_min,year_min,year_max)
-    var_array = convert_pdframe_to_nparray(Vintage_filter,varname)
-    var_array = var_array[~np.isnan(var_array)]
+    [var_array,var_mean,var_variance,ratio] = filter_nparray(country,color,varname,price_min,price_max,reviews_min,year_min,year_max)
+    var_median = np.median(var_array)
 
     # the likelihood of a wine region being better than its median is:
     
     # compute median value across all regions
-    var_median = np.median(var_array)
+
     print(var_median)
 
     # for every region, compute number of items with ratings above median value and convert into a probability
     pct_above_median_region = []; ratio_region = []; pct_above_median_boot_upper_region = []; pct_above_median_boot_lower_region = []
     for region in region_by_color_list:
         print(region)
-        Vintage, ratio = select_by_region(country,color,region)
+        [var_array,var_mean,var_variance,ratio] = filter_nparray(country,color,varname,price_min,price_max,reviews_min,year_min,year_max,region)
         ratio_region.append(ratio)
-        Vintage_filter = filter_by_criteria(Vintage,price_min,price_max,reviews_min,year_min,year_max)
-        var_array = convert_pdframe_to_nparray(Vintage_filter,varname)
-        var_array = var_array[~np.isnan(var_array)]
         var_median_region = np.median(var_array)
         len_ = len(var_array)
         len_above_median = len(var_array[np.where(var_array>=var_median)])
@@ -459,18 +545,20 @@ def plot_pdf_line(varname,country,color):
     n = 0
     ratio_total = 0
     for region in region_by_color_list:
-        Vintage, ratio = select_by_region(country,color,region)
-        Vintage_filter = filter_by_criteria(Vintage,price_min,price_max,reviews_min,year_min,year_max)
-        var_array = convert_pdframe_to_nparray(Vintage_filter,varname)
-        var_array = var_array[~np.isnan(var_array)]
+        [var_array,var_mean,var_variance,ratio] = filter_nparray(country,color,varname,price_min,price_max,reviews_min,year_min,year_max,region)
         density = stats.gaussian_kde(np.sort(var_array))
         bins_mean = np.add(bins_lim[:-1],bins_lim[1:])/2.0
-        plt.plot(bins_mean, density(bins_mean), marker_list[n]+'-', linewidth=4, label=region + ' (' + str(int(ratio)) + '%) ')
+        if varname=='Year':
+            plt.plot(bins_lim, density(bins_lim), marker_list[n]+'-', linewidth=3, label=region + ' (' + str(int(ratio)) + '%) ')
+        else:
+            plt.plot(bins_mean, density(bins_mean), marker_list[n]+'-', linewidth=3, label=region + ' (' + str(int(ratio)) + '%) ')
         n = n + 1
         ratio_total = ratio_total + ratio 
 
-#    plt.legend(loc='upper right')
-    plt.legend(loc='upper left')
+    if varname=='Year':
+        plt.legend(loc='upper left')
+    else:
+        plt.legend(loc='upper right')
     plt.xlabel(varname+unit)
     plt.xticks(xticks)
     plt.xlim(min(bins_lim),max(bins_lim))
@@ -492,12 +580,10 @@ def get_pdf_all(varname,country):
 
 def plot_pdf_histogram(varname,country,color,region='all'):
 
-    Vintage, ratio = select_by_region(country,color,region)
-    Vintage_filter = filter_by_criteria(Vintage,price_min,price_max,reviews_min,year_min,year_max)
-    var_array = convert_pdframe_to_nparray(Vintage_filter,varname)
+    [var_array,var_mean,var_variance,ratio] = filter_nparray(country,color,varname,price_min,price_max,reviews_min,year_min,year_max,region)
+
     [unit,xticks,pdf_max,bins_lim] = dic_var(varname,color)
     Country_name = convert_abbrv_fullname(country)    
-    var_array = var_array[~np.isnan(var_array)]
     density = stats.gaussian_kde(np.sort(var_array))
     bins_mean = np.add(bins_lim[:-1],bins_lim[1:])/2.0
     fig = plt.figure()
@@ -563,7 +649,7 @@ def dic_var(varname,color):
         if color=='rose':
             pdf_max = 0.1
         else:
-            pdf_max = 0.05
+            pdf_max = 0.06
     elif varname=='reviews':    
         delta = 10
         bins_lim = np.arange(reviews_min,2000+delta,delta)
@@ -578,7 +664,7 @@ def dic_var(varname,color):
         unit = ''
     elif varname=='Year':
         delta = 1
-        bins_lim = np.arange(year_min,2019+delta,delta)
+        bins_lim = np.arange(year_min,2018+delta,delta)
         xticks = bins_lim[0:len(bins_lim):2]
         pdf_max = 0.25
         unit = ''
@@ -604,7 +690,7 @@ def region_by_color(country,color):
             marker_list = ['b','c','m','r','g']
         elif color=='white':
             region_by_color_list = ['Bourgogne', 'Alsace', 'Val de Loire', 'Bordeaux', 'Vallée du Rhône']
-            marker_list = ['b','y','m','r','g']
+            marker_list = ['b','y','c','r','g']
         elif color=='rose':
             region_by_color_list = ['Provence']
             marker_list = ['k']
