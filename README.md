@@ -85,10 +85,3 @@ Likelihood of a (L) red or (R) white wine from each region being better rated th
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_predictors_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_predictors_white_FR.png" width="400">
 
 Fraction of variance in the item ratings for (L) red and (R) white wines explained by its 3 main predictors (Vintage Year, Province, and Price) in 4 different price range: 5 to 15 euros, 15 to 25, 25 to 35, 35 to 45 euros.
-
-## Variability in Price explained by its main Predictors
-
-<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_predictors_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_predictors_white_FR.png" width="400">
-
-Fraction of variance in the item price for (L) red and (R) white wines explained by its 3 main predictors (Vintage Year, Province, and Ratings) in 4 different price range: 5 to 15 euros, 15 to 25, 25 to 35, 35 to 45 euros.
-
