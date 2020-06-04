@@ -80,3 +80,10 @@ Ratings vs. price for (L) red and (R) white wines; each dot is one item. The ave
 
 Likelihood of a (L) red or (R) white wine from each region being better rated than the average among its peers in 3 different price range: 5 to 15 euros, 15 to 25, and 25 to 35 euros. A 95% confidence interval on the Likelihood estimate is shown for each region and price range.       
 
+## Variability in Quality explained by main Predictors
+
+<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_predictors_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_predictors_white_FR.png" width="400">
+
+## Variability in Price explained by main Predictors
+
+<img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_predictors_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_predictors_white_FR.png" width="400">
