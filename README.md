@@ -78,12 +78,17 @@ Ratings vs. price for (L) red and (R) white wines; each dot is one item. The ave
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_prob_median_white_FR.png" width="400">
 
-Likelihood of a (L) red or (R) white wine from each region being better rated than the average among its peers in 3 different price range: 5 to 15 euros, 15 to 25, and 25 to 35 euros. A 95% confidence interval on the Likelihood estimate is shown for each region and price range.       
+Likelihood of a (L) red or (R) white wine from each region being better rated than the average among its peers in 4 different price range: 5 to 15 euros, 15 to 25, 25 to 35, 35 to 45 euros. A 95% confidence interval on the Likelihood estimate is shown for each region and price range.       
 
-## Variability in Quality explained by main Predictors
+## Variability in Quality explained by its main Predictors
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_predictors_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/ratings_predictors_white_FR.png" width="400">
 
-## Variability in Price explained by main Predictors
+Fraction of variance in the item ratings for (L) red and (R) white wines explained by its 3 main predictors (Vintage Year, Province, and Price) in 4 different price range: 5 to 15 euros, 15 to 25, 25 to 35, 35 to 45 euros.
+
+## Variability in Price explained by its main Predictors
 
 <img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_predictors_red_FR.png" width="400"><img src="https://github.com/xlevine/Wine_Analysis/blob/master/plots/Price_predictors_white_FR.png" width="400">
+
+Fraction of variance in the item price for (L) red and (R) white wines explained by its 3 main predictors (Vintage Year, Province, and Ratings) in 4 different price range: 5 to 15 euros, 15 to 25, 25 to 35, 35 to 45 euros.
+
